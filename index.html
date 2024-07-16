@@ -3,39 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>URL Encoder for GitHub Pages</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         function encodeURL() {
-            var url = $('#url').val();
-            var type = $('#type').val();
+            var url = document.getElementById('url').value;
+            var type = document.getElementById('type').value;
 
             if (!url || !type) {
-                $('#response').text('未提供 URL 或类型参数');
+                alert('未提供 URL 或类型参数');
                 return;
             }
 
-            var encodedUrl = btoa(url);
+            var encodedUrl = encodeURIComponent(btoa(url));
 
             var apiUrl = '';
             if (type === 'open') {
-                apiUrl = 'http://openurl.zeabur.app/?url=' + encodeURIComponent(encodedUrl);
+                apiUrl = 'http://openurl.zeabur.app/?url=' + encodedUrl;
             } else if (type === 'jump') {
-                apiUrl = 'http://jumping.zeabur.app/?url=' + encodeURIComponent(encodedUrl);
+                apiUrl = 'http://jumping.zeabur.app/?url=' + encodedUrl;
             } else {
-                $('#response').text('无效的类型参数');
+                alert('无效的类型参数');
                 return;
             }
 
-            $.ajax({
-                url: apiUrl,
-                type: 'GET',
-                success: function(data) {
-                    $('#response').text('成功: ' + data.url);
-                },
-                error: function(xhr, status, error) {
-                    $('#response').text('请求失败: ' + error);
-                }
-            });
+            axios.get(apiUrl)
+                .then(function(response) {
+                    // 假设服务器返回的响应是 JSON 格式
+                    var responseData = response.data;
+                    if (responseData.code === 1) {
+                        alert('成功: ' + responseData.msg + '\nURL: ' + responseData.url);
+                    } else {
+                        alert('失败: ' + responseData.msg);
+                    }
+                })
+                .catch(function(error) {
+                    alert('请求失败: ' + error.message);
+                });
         }
     </script>
 </head>
@@ -47,6 +50,5 @@
         <option value="jump">Jump</option>
     </select>
     <button onclick="encodeURL()">Encode</button>
-    <p id="response"></p>
 </body>
 </html>
