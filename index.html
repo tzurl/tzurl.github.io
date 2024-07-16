@@ -11,10 +11,15 @@
             color: #e0e0e0;
             text-align: center;
             padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
             max-width: 800px;
-            margin: 50px auto;
+            margin: auto;
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
@@ -46,17 +51,26 @@
         a:hover {
             text-decoration: underline;
         }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="password-section">
         <h1>观影软件安装使用教程</h1>
-        <div id="password-section">
-            <p>请输入密码以访问内容：</p>
-            <input type="password" id="password" placeholder="输入密码">
-            <button onclick="checkPassword()">提交</button>
-        </div>
-        <div id="content" style="display: none;">
+        <p>请输入密码以访问内容：</p>
+        <input type="password" id="password" placeholder="输入密码">
+        <button onclick="checkPassword()">提交</button>
+        <p class="error-message hidden" id="error-message">密码错误，请重新获取密码再次输入。</p>
+    </div>
+    <div id="content" class="hidden">
+        <div class="container">
+            <h1>观影软件安装使用教程</h1>
             <p>重要说明：</p>
             <ol>
                 <li>本视频教程所用所有软件由于再内陆的特殊性，需要魔法上网，如有自行开启，如果没有，本人免费提供使用【自行返回站点内，在站点的搜索框里输入搜索【魔法】两个字】按照贴内教程安装使用，手机和电脑都能用。由于观影软件的特殊性，如果视频卡顿，就多更换更换节点试试，最好是让他慢慢下载过来再看。</li>
@@ -99,9 +113,10 @@
         function checkPassword() {
             var password = document.getElementById('password').value;
             if (password === 'vamvxyz') {
-                document.getElementById('password-section').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
+                document.getElementById('password-section').classList.add('hidden');
+                document.getElementById('content').classList.remove('hidden');
             } else {
+                document.getElementById('error-message').classList.remove('hidden');
                 window.open('https://mbd.pub/o/bread/ZpiYk5tu', '_blank');
             }
         }
