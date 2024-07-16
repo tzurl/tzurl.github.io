@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL Encoder for GitHub Pages</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function encodeURL() {
+            var url = $('#url').val();
+            var type = $('#type').val();
+
+            if (!url || !type) {
+                $('#response').text('未提供 URL 或类型参数');
+                return;
+            }
+
+            var encodedUrl = btoa(url);
+
+            var apiUrl = '';
+            if (type === 'open') {
+                apiUrl = 'http://openurl.zeabur.app/?url=' + encodeURIComponent(encodedUrl);
+            } else if (type === 'jump') {
+                apiUrl = 'http://jumping.zeabur.app/?url=' + encodeURIComponent(encodedUrl);
+            } else {
+                $('#response').text('无效的类型参数');
+                return;
+            }
+
+            $.ajax({
+                url: apiUrl,
+                type: 'GET',
+                success: function(data) {
+                    $('#response').text('成功: ' + data.url);
+                },
+                error: function(xhr, status, error) {
+                    $('#response').text('请求失败: ' + error);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>URL Encoder for GitHub Pages</h1>
+    <input type="text" id="url" placeholder="Enter URL">
+    <select id="type">
+        <option value="open">Open</option>
+        <option value="jump">Jump</option>
+    </select>
+    <button onclick="encodeURL()">Encode</button>
+    <p id="response"></p>
+</body>
+</html>
