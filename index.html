@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>观影教程</title>
+    <title>观影软件安装使用教程</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,6 +19,7 @@
         }
         .container {
             max-width: 800px;
+            width: 100%;
             margin: auto;
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
@@ -58,11 +59,14 @@
         .hidden {
             display: none;
         }
+        .video-section {
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
     <div class="container" id="password-section">
-        <h1>观影教程</h1>
+        <h1>观影软件安装使用教程</h1>
         <p>请输入密码以访问内容：</p>
         <input type="password" id="password" placeholder="输入密码">
         <button onclick="checkPassword()">提交</button>
@@ -79,14 +83,20 @@
                 <li>视频日常更新，目前约6T原画质视频，请随时关注群组。</li>
             </ol>
             <h2>视频教程</h2>
-            <video controls>
-                <source src="/img/anzhuo.mp4" type="video/mp4">
-                安卓手机端安装教程
-            </video>
-            <video controls>
-                <source src="/img/winpc.mp4" type="video/mp4">
-                WIN电脑端安装教程
-            </video>
+            <div class="video-section">
+                <h3>安卓手机端安装教程</h3>
+                <video controls>
+                    <source src="/img/anzhuo.mp4" type="video/mp4">
+                    您的浏览器不支持视频标签。
+                </video>
+            </div>
+            <div class="video-section">
+                <h3>WIN电脑端安装教程</h3>
+                <video controls>
+                    <source src="/img/winpc.mp4" type="video/mp4">
+                    您的浏览器不支持视频标签。
+                </video>
+            </div>
             <h2>观影软件手机和电脑客户端下载</h2>
             <p>这里提供了安卓和win电脑的客户端，如果是苹果设备，挂上魔法商店搜索下载安装即可。</p>
             <p>特别注意：由于这个软件的特殊性，个别时候会被墙导致注册失败，如遇失败隔天再注册即可，本人也在想办法讲片片上载到其他地方，但是由于体量太大这项大工程进展过慢，还请耐心期待，搞好以后会第一时间发出通知！</p>
