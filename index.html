@@ -1,1 +1,47 @@
-hello
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面制作中</title>
+    <style>
+        /* 设置视口，使得布局在不同设备上都能保持适应性 */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #f7f7f7;
+        }
+
+        /* 居中显示内容 */
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 简单的动画效果 */
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* 使文本闪烁以吸引注意 */
+        .blink {
+            animation: blink 1s step-start 0s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-content">
+        <p>hello</p>
+        <p>这个页面在制作中，内容和服务全部没有变，</p>
+        <p>先加QQ吧，QQ为您服务 2981826938，</p>
+        <p class="blink">来时注明面包多</p>
+    </div>
+</body>
+</html>
