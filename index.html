@@ -58,13 +58,35 @@
         </div>
     </div>
     <script>
-        function checkPassword() {
-            var password = document.getElementById('password').value;
-            if (password === 'vamwxyz') {
+        async function fetchPassword() {
+            try {
+                const response = await fetch('password'); // 根据需要调整路径
+                if (!response.ok) throw new Error('网络响应错误');
+                const text = await response.text();
+                return text.trim(); // 确保没有多余的空格或换行
+            } catch (error) {
+                console.error('获取密码失败:', error);
+            }
+        }
+
+        function hexToString(hex) {
+            let str = '';
+            for (let i = 0; i < hex.length; i += 2) {
+                str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+            }
+            return str;
+        }
+
+        async function checkPassword() {
+            const password = document.getElementById('password').value;
+            const encodedPassword = await fetchPassword();
+            const decodedPassword = hexToString(encodedPassword);
+            
+            if (password === decodedPassword) {
                 window.location.href = 'content.html';
             } else {
                 document.getElementById('error-message').style.display = 'block';
-                window.open('www.iaaa.xyz', '_blank');
+                window.open('https://www.iaaa.xyz', '_blank');
             }
         }
     </script>
