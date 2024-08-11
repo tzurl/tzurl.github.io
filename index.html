@@ -60,12 +60,12 @@
     <script>
         async function fetchPassword() {
             try {
-                const response = await fetch('password'); // 根据需要调整路径
+                const response = await fetch('password');
                 if (!response.ok) throw new Error('网络响应错误');
                 const text = await response.text();
-                return text.trim(); // 确保没有多余的空格或换行
+                return text.trim();
             } catch (error) {
-                console.error('获取密码失败:', error);
+                console.error('密码错误，请正确获取:', error);
             }
         }
 
